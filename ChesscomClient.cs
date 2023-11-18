@@ -17,6 +17,7 @@ namespace Chesscom.Api.Net
         private PlayerCurrentToMoveDailyGamesEndpoint PlayerCurrentToMoveDailyGamesEndpoint;
         private PlayerArchivesEndpoint PlayerArchivesEndpoint;
         private PlayerMonthArchiveEndpoint PlayerMonthArchiveEndpoint;
+        private PlayerMonthArchivePgnEndpoint PlayerMonthArchivePgnEndpoint;
 
         public ChesscomClient(string? defaultUserAgent = null)
         {
@@ -30,6 +31,7 @@ namespace Chesscom.Api.Net
             PlayerCurrentToMoveDailyGamesEndpoint = new PlayerCurrentToMoveDailyGamesEndpoint(UserAgent);
             PlayerArchivesEndpoint = new PlayerArchivesEndpoint(UserAgent);
             PlayerMonthArchiveEndpoint = new PlayerMonthArchiveEndpoint(UserAgent);
+            PlayerMonthArchivePgnEndpoint = new PlayerMonthArchivePgnEndpoint(UserAgent);
         }
 
         public async Task<PlayerProfileReturn?> GetPlayerProfileByUsernameAsync(string username)
@@ -67,6 +69,18 @@ namespace Chesscom.Api.Net
         public async Task<PlayerMonthArchiveReturn?> GetPlayerMonthArchiveByUsernameYearMonthAsync(string username, int year, int month)
         {
             return await PlayerMonthArchiveEndpoint.GetPlayerMonthArchiveByUsernameYearMonthAsync(username, year, month);
+        }
+        public async Task<string?> GetPlayerMonthlyArchivePgnByUrlAsync(string url, string? filePath = null)
+        {
+            return await PlayerMonthArchivePgnEndpoint.GetPlayerMonthlyArchivePgnByUrlAsync(url, filePath);
+        }
+        public async Task<string?> GetPlayerMonthlyArchivePgnByArchiveUrlAsync(string archiveUrl, string? filePath = null)
+        {
+            return await PlayerMonthArchivePgnEndpoint.GetPlayerMonthlyArchivePgnByArchiveUrlAsync(archiveUrl, filePath);
+        }
+        public async Task<string?> GetPlayerMonthArchivePgnByUsernameYearMonthAsync(string username, int year, int month, string? filePath)
+        {
+            return await PlayerMonthArchivePgnEndpoint.GetPlayerMonthArchivePgnByUsernameYearMonthAsync(username, year, month, filePath);
         }
     }
 }

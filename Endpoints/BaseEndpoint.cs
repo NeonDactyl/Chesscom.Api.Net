@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,14 @@ namespace Chesscom.Api.Net.Endpoints
             HttpResponseMessage response = await HttpClient.GetAsync(url);
             var contentString = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<ReturnType>(contentString);
+        }
+
+        protected async Task<string> GetFileAsync(string url, string? filePath = null)
+        {
+            HttpResponseMessage response = await HttpClient.GetAsync(url);
+            var contentString = await response.Content.ReadAsStringAsync();
+            if (filePath != null) File.WriteAllText(filePath, contentString);
+            return contentString;
         }
     }
 }
