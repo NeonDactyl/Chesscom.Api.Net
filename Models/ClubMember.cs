@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
+using System;
 
 namespace Chesscom.Api.Net.Models
 {
@@ -10,6 +11,6 @@ namespace Chesscom.Api.Net.Models
 
         [JsonProperty("joined")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
-        public long Joined { get; set; }
+        public DateTime Joined { get; set; }
     }
 }

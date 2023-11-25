@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 
 namespace Chesscom.Api.Net.Models.Return
@@ -38,18 +39,18 @@ namespace Chesscom.Api.Net.Models.Return
 
         [JsonProperty("move_by")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
-        public long MoveBy { get; set; }
+        public DateTime MoveBy { get; set; }
 
         [JsonProperty("draw_offer")]
         public string? DrawOffer { get; set; }
 
         [JsonProperty("last_activity")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
-        public long LastActivity { get; set; }
+        public DateTime LastActivity { get; set; }
 
         [JsonProperty("start_time")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
-        public long StartTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         [JsonProperty("time_control")]
         public string? TimeControl { get; set; }

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 
 namespace Chesscom.Api.Net.Models.Return
@@ -23,7 +24,7 @@ namespace Chesscom.Api.Net.Models.Return
 
         [JsonProperty("finish_time")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
-        public long FinishTime { get; set; }
+        public DateTime FinishTime { get; set; }
 
         [JsonProperty("settings")]
         public TournamentSettings? Settings { get; set; }

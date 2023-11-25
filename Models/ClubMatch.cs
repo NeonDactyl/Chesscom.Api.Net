@@ -22,7 +22,7 @@ namespace Chesscom.Api.Net.Models
 
         [JsonProperty("start_time")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
-        public long StartTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         [JsonProperty("time_class")]
         public string? TimeClass { get; set; }

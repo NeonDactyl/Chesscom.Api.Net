@@ -26,6 +26,7 @@ namespace Chesscom.Api.Net
         private TournamentEndpoint TournamentEndpoint;
         private TournamentRoundsEndpoint TournamentRoundsEndpoint;
         private TournamentRoundGroupsEndpoint TournamentRoundGroupsEndpoint;
+        private TeamMatchEndpoint TeamMatchEndpoint;
 
         public ChesscomClient(string? defaultUserAgent = null)
         {
@@ -48,6 +49,7 @@ namespace Chesscom.Api.Net
             TournamentEndpoint = new TournamentEndpoint(UserAgent);
             TournamentRoundsEndpoint = new TournamentRoundsEndpoint(UserAgent);
             TournamentRoundGroupsEndpoint = new TournamentRoundGroupsEndpoint(UserAgent);
+            TeamMatchEndpoint = new TeamMatchEndpoint(UserAgent);
         }
         public async Task<PlayerProfileReturn?> GetPlayerProfileByUsernameAsync(string username)
         {
@@ -137,6 +139,10 @@ namespace Chesscom.Api.Net
         public async Task<TournamentRoundGroupDetails?> GetTournamentRoundGroupDetailsAsync(string tournamentId, int roundNumber, int groupNumber)
         {
             return await TournamentRoundGroupsEndpoint.GetTournamentRoundGroupDetailsAsync(tournamentId, roundNumber, groupNumber);
+        }
+        public async Task<TeamMatchDetailsReturn?> GetTeamMatchDetailsByMatchIdAsync(string matchId)
+        {
+            return await TeamMatchEndpoint.GetTeamMatchDetailsByMatchIdAsync(matchId);
         }
     }
 }
