@@ -18,6 +18,14 @@ namespace Chesscom.Api.Net
         private PlayerArchivesEndpoint PlayerArchivesEndpoint;
         private PlayerMonthArchiveEndpoint PlayerMonthArchiveEndpoint;
         private PlayerMonthArchivePgnEndpoint PlayerMonthArchivePgnEndpoint;
+        private PlayerClubsEndpoint PlayerClubsEndpoint;
+        private PlayerTournamentsEndpoint PlayerTournamentsEndpoint;
+        private ClubEndpoint ClubEndpoint;
+        private ClubMembersEndpoint ClubMembersEndpoint;
+        private ClubMatchesEndpoint ClubMatchesEndpoint;
+        private TournamentEndpoint TournamentEndpoint;
+        private TournamentRoundsEndpoint TournamentRoundsEndpoint;
+        private TournamentRoundGroupsEndpoint TournamentRoundGroupsEndpoint;
 
         public ChesscomClient(string? defaultUserAgent = null)
         {
@@ -32,8 +40,15 @@ namespace Chesscom.Api.Net
             PlayerArchivesEndpoint = new PlayerArchivesEndpoint(UserAgent);
             PlayerMonthArchiveEndpoint = new PlayerMonthArchiveEndpoint(UserAgent);
             PlayerMonthArchivePgnEndpoint = new PlayerMonthArchivePgnEndpoint(UserAgent);
+            PlayerClubsEndpoint = new PlayerClubsEndpoint(UserAgent);
+            PlayerTournamentsEndpoint = new PlayerTournamentsEndpoint(UserAgent);
+            ClubEndpoint = new ClubEndpoint(UserAgent);
+            ClubMembersEndpoint = new ClubMembersEndpoint(UserAgent);
+            ClubMatchesEndpoint = new ClubMatchesEndpoint(UserAgent);
+            TournamentEndpoint = new TournamentEndpoint(UserAgent);
+            TournamentRoundsEndpoint = new TournamentRoundsEndpoint(UserAgent);
+            TournamentRoundGroupsEndpoint = new TournamentRoundGroupsEndpoint(UserAgent);
         }
-
         public async Task<PlayerProfileReturn?> GetPlayerProfileByUsernameAsync(string username)
         {
             return await PlayerProfileEndpoint.GetPlayerProfileByUsernameAsync(username);
@@ -81,6 +96,47 @@ namespace Chesscom.Api.Net
         public async Task<string?> GetPlayerMonthArchivePgnByUsernameYearMonthAsync(string username, int year, int month, string? filePath)
         {
             return await PlayerMonthArchivePgnEndpoint.GetPlayerMonthArchivePgnByUsernameYearMonthAsync(username, year, month, filePath);
+        }
+        public async Task<PlayerClubsReturn?> GetPlayerClubsByUsernameAsync(string username)
+        {
+            return await PlayerClubsEndpoint.GetPlayerClubsByUsernameAsync(username);
+        }
+        public async Task<PlayerTournamentsReturn?> GetPlayerTournamentsByUsernameAsync(string username)
+        {
+            return await PlayerTournamentsEndpoint.GetPlayerTournamentsByUsernameAsync(username);
+        }
+        public async Task<ClubReturn?> GetClubProfileAsync(string urlId)
+        {
+            return await ClubEndpoint.GetClubProfileAsync(urlId);
+
+        }
+        public async Task<ClubMembersReturn?> GetClubMembersActivityAsync(string urlId)
+        {
+            return await ClubMembersEndpoint.GetClubMembersActivityAsync(urlId);
+        }
+        public async Task<ClubMatchesReturn?> GetClubMatchesAsync(string urlId)
+        {
+            return await ClubMatchesEndpoint.GetClubMatchesAsync(urlId);
+        }
+        public async Task<TournamentReturn?> GetTournamentDetailsAsync(string urlId)
+        {
+            return await TournamentEndpoint.GetTournamentDetailsAsync(urlId);
+        }
+        public async Task<TournamentRoundReturn?> GetTournamentRoundAsync(string roundUrl)
+        {
+            return await TournamentRoundsEndpoint.GetTournamentRoundReturnByUrlAsync(roundUrl);
+        }
+        public async Task<TournamentRoundReturn?> GetTournamentRoundAsync(string tournamentId, int roundNumber)
+        {
+            return await TournamentRoundsEndpoint.GetTournamentRoundReturnAsync(tournamentId, roundNumber);
+        }
+        public async Task<TournamentRoundGroupDetails?> GetTournamentRoundGroupDetailsAsync(string url)
+        {
+            return await TournamentRoundGroupsEndpoint.GetTournamentRoundGroupDetailsByUrlAsync(url);
+        }
+        public async Task<TournamentRoundGroupDetails?> GetTournamentRoundGroupDetailsAsync(string tournamentId, int roundNumber, int groupNumber)
+        {
+            return await TournamentRoundGroupsEndpoint.GetTournamentRoundGroupDetailsAsync(tournamentId, roundNumber, groupNumber);
         }
     }
 }
